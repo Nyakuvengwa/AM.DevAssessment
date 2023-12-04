@@ -2,10 +2,9 @@
 
 public interface ITaxCalculatorService
 {
-    Task<TaxCalculation> CalculateTaxCalculationAsync(decimal annualIncome, string postalCode);
+    TaxCalculation CalculateTax(decimal annualIncome);
 }
 
 public record TaxCalculation(
     string Type,
-    decimal TotalTaxPayable,
-    decimal TaxRate);
+    decimal TotalTaxPayable);
