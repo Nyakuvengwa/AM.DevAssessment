@@ -8,12 +8,12 @@ public class ProgressiveTaxCalculationService : ITaxCalculatorService
         decimal tax = 0m;
         List<TaxBracket> taxBrackets = new()
         {
-            new() { Rate = 0.1m, From = 0, To = 8350 }, // 835 + 3839.7
-            new() { Rate = 0.15m, From = 8351, To = 33950 },
-            new() { Rate = 0.25m, From = 33951, To = 82250 },
-            new() { Rate = 0.28m, From = 82251, To = 171550 },
-            new() { Rate = 0.33m, From = 171551, To = 372950 },
-            new() { Rate = 0.35m, From = 372951, To = decimal.MaxValue } // For incomes exceeding the highest bracket
+            new(0.1m, 0, 8350 ), // 835 + 3839.7
+            new(0.15m, 8351, 33950 ),
+            new(0.25m,  33951, 82250 ),
+            new(0.28m,  82251, 171550 ),
+            new(0.33m,  171551, 372950 ),
+            new(0.35m,  372951, decimal.MaxValue) 
         };
 
         foreach (var taxBracket in taxBrackets)
@@ -40,7 +40,16 @@ public class ProgressiveTaxCalculationService : ITaxCalculatorService
 
 public class TaxBracket
 {
-    public decimal Rate { get; set; }
-    public decimal From { get; set; }
-    public decimal To { get; set; }
+    public decimal Rate { get; }
+
+    public decimal From { get; }
+    public decimal To { get; }
+
+    public TaxBracket(decimal rate, decimal from, decimal to)
+    {
+        Rate = rate;
+        From = from;
+        To = to;
+    }
+
 }
