@@ -1,0 +1,34 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "am.devassessment": "StartDebugging",
+        "am.devassessment.api": "StartDebugging"
+      }
+    },
+    "Web": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "am.devassessment",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}",
+      "serviceActions": {
+        "am.devassessment": "StartDebugging",
+        "am.devassessment.api": "StartWithoutDebugging"
+      }
+    },
+    "API only": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "am.devassessment.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "serviceActions": {
+        "am.devassessment": "DoNotStart",
+        "am.devassessment.api": "StartDebugging"
+      }
+    }
+  }
+}

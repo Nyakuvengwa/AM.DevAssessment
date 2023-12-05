@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  am.devassessment:
+    image: ${DOCKER_REGISTRY-}amdevassessment
+    build:
+      context: .
+      dockerfile: AM.DevAssessment/Dockerfile
+
+  am.devassessment.api:
+    image: ${DOCKER_REGISTRY-}amdevassessmentapi
+    build:
+      context: .
+      dockerfile: AM.DevAssessment.Api/Dockerfile
+
