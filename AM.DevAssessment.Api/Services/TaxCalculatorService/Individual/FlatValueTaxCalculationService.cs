@@ -1,8 +1,8 @@
-﻿namespace AM.DevAssessment.Api.TaxCalculator.Individual;
+﻿namespace AM.DevAssessment.Api.Services.TaxCalculatorService.Individual;
 
 public class FlatValueTaxCalculationService : ITaxCalculatorService
 {
-    private const string Type = "Flat Value";
+    public const string Type = "Flat Value";
     private const decimal _flatValuePercentage = 0.05m;
 
     public TaxCalculation CalculateTax(decimal annualIncome)

@@ -1,5 +1,4 @@
-﻿
-namespace AM.DevAssessment.Api.TaxCalculator.Individual;
+﻿namespace AM.DevAssessment.Api.Services.TaxCalculatorService.Individual;
 
 public class ProgressiveTaxCalculationService : ITaxCalculatorService
 {
@@ -13,7 +12,7 @@ public class ProgressiveTaxCalculationService : ITaxCalculatorService
             new(0.25m,  33951, 82250 ),
             new(0.28m,  82251, 171550 ),
             new(0.33m,  171551, 372950 ),
-            new(0.35m,  372951, decimal.MaxValue) 
+            new(0.35m,  372951, decimal.MaxValue)
         };
 
         foreach (var taxBracket in taxBrackets)

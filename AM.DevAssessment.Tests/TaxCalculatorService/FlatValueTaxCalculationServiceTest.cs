@@ -1,11 +1,13 @@
-﻿namespace AM.DevAssessment.Tests.TaxCalculator;
+﻿using AM.DevAssessment.Api.Services.TaxCalculatorService;
+
+namespace AM.DevAssessment.Tests.TaxCalculatorService;
 
 public class FlatValueTaxCalculationServiceTest
 {
     private readonly ITaxCalculatorService _taxCalculatorService;
     public FlatValueTaxCalculationServiceTest()
     {
-        _taxCalculatorService = new FlatValueTaxCalculationService();   
+        _taxCalculatorService = new FlatValueTaxCalculationService();
     }
 
     [TestCase(-240, 0)]

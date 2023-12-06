@@ -1,4 +1,4 @@
-﻿namespace AM.DevAssessment.Api.TaxCalculator;
+﻿namespace AM.DevAssessment.Api.Services.TaxCalculatorService;
 
 public interface ITaxCalculatorService
 {

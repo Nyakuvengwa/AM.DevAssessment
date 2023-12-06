@@ -6,5 +6,18 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<form class="col-sm-12 col-md-8 col-lg-6" method="post">
+    <div class="mb-3">
+        <label for="annual-income" class="form-label">Annual Income</label>
+        <input asp-for="AnnualIncome" type="text" class="form-control" id="annual-income" aria-label="Annual income to be calculated">
+        <span asp-validation-for="AnnualIncome" class="invalid-feedback"></span>
+    </div>
+  <div class="mb-3">
+        <label for="postal-code" class="form-label">Postal Code</label>
+        <input asp-for="PostalCode" type="text" class="form-control" id="postal-code">
+        <span asp-validation-for="PostalCode" class="invalid-feedback"></span>
+  </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

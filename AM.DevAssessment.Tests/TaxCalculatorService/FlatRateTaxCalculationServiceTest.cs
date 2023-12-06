@@ -1,4 +1,6 @@
-﻿namespace AM.DevAssessment.Tests.TaxCalculator;
+﻿using AM.DevAssessment.Api.Services.TaxCalculatorService;
+
+namespace AM.DevAssessment.Tests.TaxCalculatorService;
 
 public class FlatRateTaxCalculationServiceTest
 {
