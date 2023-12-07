@@ -1,4 +1,6 @@
-﻿namespace AM.DevAssessment.Tests.TaxCalculatorService;
+﻿using AM.DevAssessment.Api.Models;
+
+namespace AM.DevAssessment.Tests.TaxCalculatorService;
 
 public class ProgressiveTaxCalculationServiceTest
 {

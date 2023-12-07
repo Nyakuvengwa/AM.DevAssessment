@@ -1,0 +1,45 @@
+﻿@page
+@model SummaryModel
+@{
+    ViewData["Title"] = "Summary";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.TaxCalculationSummaries.Any())
+{
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Postal code</th>
+            <th scope="col">Tax Calculation Type</th>
+            <th scope="col">Annual income</th>
+            <th scope="col">Tax Payable</th>
+            <th scope="col">Created Date (UTC)</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    <tbody>
+            @foreach (var item in Model.TaxCalculationSummaries)
+            {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.PostalCode</td>
+                <td>@item.TaxCalculationType</td>
+                <td>@item.AnnualIncome.ToString("0.00")</td>
+                <td>@item.TotalTaxPayable.ToString("0.00")</td>
+                <td>@item.CreatedDate.ToString("g")</td>
+            </tr>
+            }
+    </tbody>
+    </table>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Tax Calculations will be displayed here.</h1>
+    </div>
+}
+

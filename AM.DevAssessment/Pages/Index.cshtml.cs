@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AM.DevAssessment.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,6 +14,10 @@ namespace AM.DevAssessment.Pages
         [Required, MinLength(3)]
         public string PostalCode { get; set; } = string.Empty;
 
+        public string Error { get; set; } = string.Empty;
+        [BindProperty]
+        public bool IsCalculating { get; set; } = false;
+        public IndividualTaxCalculationResponse? IndividualTaxCalculation { get; set; } = null;
         private readonly HttpClient _httpClient;
         private readonly ILogger<IndexModel> _logger;
 
@@ -29,24 +34,44 @@ namespace AM.DevAssessment.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _logger.LogInformation("{AnnualIncome}-{PostalCode}", AnnualIncome, PostalCode);
-                try
-                {
-                var result = await _httpClient.PostAsJsonAsync("https://am.devassessment.api/tax/individual/calculate", new IndividualTaxCalculationRequest(AnnualIncome, PostalCode));
+                return Page();
+            }
 
-                }
-                catch (Exception e)
+            try
+            {
+                IsCalculating = true;
+
+                var responseMessage = await _httpClient.PostAsJsonAsync("http://am.devassessment.api/tax/individual/calculate", new IndividualTaxCalculationRequest(AnnualIncome, PostalCode));
+
+                IsCalculating = false;
+                if (responseMessage is null)
                 {
-                    _logger.LogError(e, "Unable to process request");
+                    return Page();
                 }
+
+                if(!responseMessage.IsSuccessStatusCode)
+                {
+                    var error = await responseMessage.Content.ReadFromJsonAsync<ProblemDetails>();
+
+                    Error = $"{error?.Title} {string.Join(",",error?.Extensions?.Values?.Select(x => x?.ToString()))}";
+                    return Page();
+                }
+                var response = await responseMessage.Content.ReadFromJsonAsync<IndividualTaxCalculationResponse>();
+                if (response is null)
+                {
+                    return Page();
+                }
+                IndividualTaxCalculation = response;
+            }
+            catch (Exception e)
+            {
+                Error = e.Message;
+                _logger.LogError(e, "Unable to process request");
             }
 
             return Page();
         }
     }
 }
-public record IndividualTaxCalculationRequest(
-    decimal AnnualIncome,
-    string PostalCode);

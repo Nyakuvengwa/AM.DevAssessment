@@ -1,4 +1,6 @@
-﻿namespace AM.DevAssessment.Api.Services.TaxCalculatorService.Individual;
+﻿using AM.DevAssessment.Api.Models;
+
+namespace AM.DevAssessment.Api.Services.TaxCalculatorService.Individual;
 
 public class ProgressiveTaxCalculationService : ITaxCalculatorService
 {

@@ -1,4 +1,4 @@
-﻿using AM.DevAssessment.Api.Services.TaxCalculatorService;
+﻿using AM.DevAssessment.Api.Models;
 
 namespace AM.DevAssessment.Tests.TaxCalculatorService;
 

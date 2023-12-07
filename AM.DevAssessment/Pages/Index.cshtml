@@ -1,23 +1,49 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Tax Calculation";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Tax Calculation</h1>
 </div>
 
-<form class="col-sm-12 col-md-8 col-lg-6" method="post">
+<form class="col-sm-12 col-md-8 col-lg-6 mb-2" method="post">
     <div class="mb-3">
-        <label for="annual-income" class="form-label">Annual Income</label>
-        <input asp-for="AnnualIncome" type="text" class="form-control" id="annual-income" aria-label="Annual income to be calculated">
-        <span asp-validation-for="AnnualIncome" class="invalid-feedback"></span>
+        <label for="AnnualIncome" class="form-label">Annual Income</label>
+        <input asp-for="AnnualIncome" type="text" class="form-control" id="AnnualIncome" aria-label="Annual income to be calculated">
+        <span asp-validation-for="AnnualIncome" class="text-danger"></span>
     </div>
   <div class="mb-3">
-        <label for="postal-code" class="form-label">Postal Code</label>
-        <input asp-for="PostalCode" type="text" class="form-control" id="postal-code">
-        <span asp-validation-for="PostalCode" class="invalid-feedback"></span>
+        <label for="PostalCode" class="form-label">Postal Code</label>
+        <input asp-for="PostalCode" type="text" class="form-control" id="PostalCode" aria-label="Postal Code">
+        <span asp-validation-for="PostalCode" class="text-danger"></span>
   </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
+    @if (Model.IsCalculating)
+    {
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    }
 </form>
+
+@if(Model.IndividualTaxCalculation is not null)
+{
+    <div class="card">
+        <div class="card-body">
+            <p>
+                The individual's total tax payable is <strong>@Model.IndividualTaxCalculation.TotalTaxPayable.ToString("0.00")</strong>.
+            </p>
+            <p>
+                The tax calculation type used is <strong>@Model.IndividualTaxCalculation.TaxCalculationType</strong>.</p>
+        </div>
+    </div>
+}
+
+@if(!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.Error
+    </div>
+}
